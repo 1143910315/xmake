@@ -372,8 +372,15 @@ function _get_configs_for_windows(package, configs, opt)
         end
     end
 
+    print("xxxxx", package:name())
+    for _, toolchain_inst in ipairs(package:toolchains()) do
+        print("toolchain", toolchain_inst:name())
+    end
+    print(package:requireinfo())
+
     -- use clang-cl
     if package:has_tool("cc", "clang_cl") then
+        print("has clang-cl")
         table.insert(configs, "-DCMAKE_C_COMPILER=" .. _translate_bin_path(package:build_getenv("cc")))
     end
     if package:has_tool("cxx", "clang_cl") then
