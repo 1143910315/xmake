@@ -534,10 +534,14 @@ function _init_requireinfo(requireinfo, package, opt)
         -- we always pass some configurations from toplevel even it's headeronly, because it's library deps need inherit them
         -- @see https://github.com/xmake-io/xmake/issues/2688
         if package:is_library() then
+            print("_init_requireinfo", package:name())
+            print(1, requireinfo.configs)
             requireinfo.configs.toolchains = requireinfo.configs.toolchains or project.get("target.toolchains")
+            print(2, requireinfo.configs)
             if project.policy("package.inherit_external_configs") then
                 requireinfo.configs.toolchains = requireinfo.configs.toolchains or get_config("toolchain")
             end
+            print(3, requireinfo.configs)
         end
         requireinfo.configs.runtimes = requireinfo.configs.runtimes or project.get("target.runtimes")
         if project.policy("package.inherit_external_configs") then
