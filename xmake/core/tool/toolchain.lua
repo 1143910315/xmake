@@ -742,12 +742,15 @@ function toolchain.tool(toolchains, toolkind, opt)
         program = cache:get2(cachekey, "program")
         toolname = cache:get2(cachekey, "toolname")
         toolchain_info = cache:get2(cachekey, "toolchain_info")
+        print("cachekey", cachekey, program, toolname)
     end
 
     -- get program from toolchains
     if not program then
+        print("toolchain.tool 000")
         for idx, toolchain_inst in ipairs(toolchains) do
             program, toolname = toolchain_inst:tool(toolkind)
+            print("toolchain.tool", toolkind, program, toolname)
             if program then
                 toolchain_info = {name = toolchain_inst:name(),
                                   plat = toolchain_inst:plat(),

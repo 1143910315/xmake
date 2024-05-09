@@ -380,7 +380,7 @@ function _get_configs_for_windows(package, configs, opt)
 
     -- use clang-cl
     if package:has_tool("cc", "clang_cl") then
-        print("has clang-cl")
+        print("has clang-cl", package:build_getenv("cc"))
         table.insert(configs, "-DCMAKE_C_COMPILER=" .. _translate_bin_path(package:build_getenv("cc")))
     end
     if package:has_tool("cxx", "clang_cl") then

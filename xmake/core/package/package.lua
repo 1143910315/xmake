@@ -1202,8 +1202,10 @@ end
 -- get the program and name of the given tool kind
 function _instance:tool(toolkind)
     if self:toolchains() then
+        print("package:tool1", toolkind)
         return toolchain.tool(self:toolchains(), toolkind, {cachekey = "package", plat = self:plat(), arch = self:arch()})
     else
+        print("package:tool2", toolkind)
         return platform.tool(toolkind, self:plat(), self:arch())
     end
 end
@@ -1244,6 +1246,7 @@ end
 function _instance:has_tool(toolkind, ...)
     local _, toolname = self:tool(toolkind)
     if toolname then
+        print("toolname", toolname)
         for _, v in ipairs(table.join(...)) do
             if v and toolname:find("^" .. v:gsub("%-", "%%-") .. "$") then
                 return true
